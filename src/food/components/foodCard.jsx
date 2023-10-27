@@ -1,6 +1,7 @@
 
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const FoodCard = ({
     idCategory, strCategory, strCategoryThumb
@@ -15,7 +16,7 @@ export const FoodCard = ({
                         <h5 class="card-title">{strCategory}</h5>                     
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Ver comidas</p>
+                        <Link to={`/foodCategory/${strCategory}`}>Ver comidas</Link>
                     </div>
                 </div>   
             </div>
@@ -23,8 +24,3 @@ export const FoodCard = ({
     </div>
   )
 }
-/*
-<Link to={ `./hero/${ id }` }>
-                            Más...
-                        </Link>
-                        */

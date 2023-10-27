@@ -1,19 +1,21 @@
 
 import React from 'react'
-import { useFoodStore } from '../../hooks/useFoodStore';
 import { FoodCard } from './foodCard';
+import { useSelector } from 'react-redux';
 
 export const FoodList = () => {
-
-    const {foods} = useFoodStore();
-  
+   
+    const {foods} = useSelector(state => state.food);
+     
     return (
         <div className='container text-center'>
             <div className='card-columns'>
             {
-                foods.map( food =>(
-                    <FoodCard key={food.idCategory} {...food}/>
-                    )
+                foods.map( (food) =>
+                    //(food!==undefined)?
+                    ( 
+                        <FoodCard key={food.idCategory} {...food}/>
+                    )//:''
                 )    
             }
             </div>

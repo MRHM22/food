@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { foodSlice } from './';
+import { foodByCategorySlice, foodSlice } from './';
 export const store = configureStore({
     reducer: {
-        food: foodSlice.reducer
+        food: foodSlice.reducer,
+        foodByCategory: foodByCategorySlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false

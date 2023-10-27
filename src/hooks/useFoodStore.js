@@ -1,30 +1,50 @@
 
 
 import { foodApi } from '../api/foodApi';
-import { useDispatch, useSelector } from 'react-redux';
-import { onLoadingFood } from '../store';
+import { useDispatch } from 'react-redux';
+import { onLoadingFood, onLoadingfoodByCategory } from '../store';
+import { getRandomCategories } from '../helpers/getRandomCategories';
 
 export const useFoodStore = () => {
 
     const dispatch = useDispatch();
 
-    const {foods} = useSelector(state => state.food);
+    
 
     const loadingFoods = async()=>{
 
         try{
             const {data} = await foodApi.get('/categories.php');
-            //console.log(data.categories);
-            console.log(foods.length);
-            dispatch( onLoadingFood(data.categories) );
+            const categories = getRandomCategories(data.categories);
+            dispatch( onLoadingFood(categories) );
         } catch(error){
             console.log(error);
         }
     }
+
+    const loadingCategories = async()=> {
+      try{
+        const {data} = await foodApi.get('/categories.php');
+        return data.categories;
+    } catch(error){
+        console.log(error);
+    }
+    }
+
+    const loadingFoodByCategory = async(nameCategory) =>{
+      try{
+        const {data} = await foodApi.get(`/filter.php?c=${nameCategory}`);
+        dispatch(onLoadingfoodByCategory(data.meals));
+      }catch(error){
+        console.log(error);
+      }
+    }
+
   return {
     
-    foods,
+  //  foods,
     
-    loadingFoods
+    loadingFoods,
+    loadingFoodByCategory
   }
 }

@@ -16,6 +16,10 @@ export const Navbar = () => {
           <Link to={'/favorite'} className='text-dark' >Favoritos</Link>    
         </span> 
         
+        <span className="navbar-brand">
+          <i className="fas fa-star"></i>
+          <Link to={'/categories'} className='text-dark' >Categorias</Link>    
+        </span> 
       </div>
     </div>
   )
