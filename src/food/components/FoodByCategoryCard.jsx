@@ -3,15 +3,14 @@ import React from 'react';
 
 export const FoodByCategoryCard = ({idMeal,strMealThumb,strMeal}) => {
 
-  return (/*
-    <div class="container text-center">
-        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-            <div id={idMeal} class="col">
-                <img src={strMealThumb} class="card-img-top" alt={strMeal}/>
-                <div class="p-3">{strMeal}</div>
+  return (
+    <div className="row">
+        <div className="col">
+            <div id={idMeal} className="card border-secondary">
+                <img src={strMealThumb} className="card-img-top" alt={strMeal}/>
+                <div className="p-3">{strMeal}</div>
             </div>
         </div>
-    </div>*/
-    <>Hola</>
+    </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useFoodStore } from '../../hooks/useFoodStore';
 import { FoodList } from '../components/FoodList';
+import { FoodHeader } from '../components/FoodHeader';
 
 export const FoodPage = () => {
 
@@ -11,6 +12,10 @@ export const FoodPage = () => {
   });
 
   return (
-    <FoodList />
+    <>
+      <FoodHeader />
+      &nbsp;
+      <FoodList />
+    </>
   )
 }

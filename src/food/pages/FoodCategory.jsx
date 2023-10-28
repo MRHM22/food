@@ -13,6 +13,6 @@ export const FoodCategory = () => {
   });
 
   return (
-    <FoodByCategoryList />
+    <FoodByCategoryList name={strCategory} />
   )
 }
