@@ -26,9 +26,9 @@ export const useFoodStore = () => {
       try{
         const {data} = await foodApi.get('/categories.php');
         return data.categories;
-    } catch(error){
-        console.log(error);
-    }
+      } catch(error){
+          console.log(error);
+      }
     }
 
     const loadingFoodByCategory = async(nameCategory) =>{
@@ -45,6 +45,7 @@ export const useFoodStore = () => {
   //  foods,
     
     loadingFoods,
+    loadingCategories,
     loadingFoodByCategory
   }
 }

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 export const FoodList = () => {
    
     const {foods} = useSelector(state => state.food);
-     
+
     return (
         <div className='container text-center'>
             <div className='card-columns'>
