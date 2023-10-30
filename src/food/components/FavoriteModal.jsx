@@ -1,8 +1,7 @@
 
-import React, {  useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-modal';
 import {useModalStore} from '../../hooks/useModalStore';
-import { useFavoriteStore } from '../../hooks/useFavoriteStore';
 
 const customStyles = {
     content: {
@@ -22,19 +21,14 @@ export const FavoriteModal = () => {
 
     const {isModalOpen,closeFavoriteModal} = useModalStore();
     const [value, setValue] = useState('Guardar');
-    const { registerFoodRandom } = useFavoriteStore();
 
     const onCloseModal = () => {
         closeFavoriteModal();
     }
     
-    const [favorite, setFavorite] = useState(null);
-/*
-    useEffect(() => {
-        setFavorite(registerFoodRandom());
-        console.log(favorite);
-    },[favorite]);*/
-
+    //const favorite = localStorage.getItem('favorite');
+    
+    //console.log(favorite);
     const changeNameButton = (event)=>{
         event.preventDefault();
         //const favorite = localStorage.getItem('favorite');

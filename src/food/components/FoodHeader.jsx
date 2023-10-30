@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useModalStore } from '../../hooks/useModalStore'
 import { FavoriteModal } from './FavoriteModal';
+import { useFavoriteStore } from '../../hooks/useFavoriteStore';
 
 export const FoodHeader = () => {
 
   const {openFavoriteModal} = useModalStore();
-
+  const { loadingFoodRandom } = useFavoriteStore();
+  useEffect(() => {
+    loadingFoodRandom();
+  });
   const onClickModal = (event)=>{
     openFavoriteModal();
   }

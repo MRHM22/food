@@ -10,7 +10,7 @@ export const FoodCard = ({
     <div className='' >
         <div className='row'> 
             <div className="col">
-                <div id={idCategory} class="card "  >
+                <div id={idCategory} className="card "  >
                     <img src={strCategoryThumb} className="card-img-top" alt={strCategory}/>
                     <div className="card-body">
                         <h5 className="card-title">{strCategory}</h5>
