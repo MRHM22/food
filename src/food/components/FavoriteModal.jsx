@@ -5,7 +5,7 @@ import {useModalStore} from '../../hooks/useModalStore';
 import { useFavoriteStore } from '../../hooks/useFavoriteStore';
 import axios from 'axios';
 import { foodApi } from '../../api/foodApi';
-import { getFavoriteFood } from '../../helpers/getFavoriteFood';
+import { concatList, getFavoriteFood, modifiedVideo } from '../../helpers/getFavoriteFood';
 
 const customStyles = {
     content: {
@@ -13,6 +13,7 @@ const customStyles = {
       left: '50%',
       right: 'auto',
       bottom: 'auto',
+      overflow: 'scroll',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
     },
@@ -74,9 +75,45 @@ export const FavoriteModal = () => {
         className='modal'
         overlayClassName="modal-fondo"
         closeTimeoutMS={200} >
-            <div className='container'>
-                <h2 className='text-center'>{meal.strMeal}</h2>
-                <img src={meal.strMealThumb} className="card-img-top" />
+            <div id={meal.idMeal} className='container'>
+                <h3 className='text-center'>{meal.strMeal}</h3>
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col'>
+                        <img src={meal.strMealThumb} alt={meal.strMeal} className="card-img-top" />
+                        </div>
+                        <div className='col'>
+                            <h4>Categoria: {meal.strCategory}</h4>
+                            <p>País: {meal.strArea}</p>
+                            {
+                                (meal.strYoutube &&
+                                <iframe width="280" height="210" title={meal.strMeal}
+                                src={modifiedVideo(meal.strYoutube) }>
+                                </iframe> )
+                            }
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col'>
+                        <h4 className='text-danger'>Ingredientes</h4>
+                        <p className='text-justify'>
+                            {
+                                concatList(meal.ingredients, meal.measure)
+                               /* concatList(meal.ingredients, meal.measure).map((elem)=>(
+                                    <li className='list-group-item'>
+                                        {elem}
+                                    </li>
+                                ))*/
+                            }
+                        </p>
+                        <h4 className='text-primary'>Instrucciones</h4>
+                        <p className='text-justify'>
+                            {meal.strInstructions}
+                        </p>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;
                 <button
                     onClick={changeNameButton} 
                      className={style}

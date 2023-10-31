@@ -22,6 +22,7 @@ export const getFavoriteFood = (meal=[])=>{
     }
     
   }
+
   newMeal.measure = measure;
   newMeal.ingredients = ingredients;
 
@@ -31,4 +32,20 @@ export const getFavoriteFood = (meal=[])=>{
 const deleteNull = (meal =[]) => {
   return Object.fromEntries(Object.entries(meal[0]).filter(([_, value]) => 
   value !== '' && value !== ' ' && value !==null ));
+}
+
+export const modifiedVideo = (url='') =>{
+  return url.replace('watch?v=','embed/');
+}
+
+export const concatList = (ingredients, measure=[]) => {
+  let newList = [];
+  for (let index = 0; index < measure.length; index++) {
+    (index ===measure.length -1)
+      ? newList[index] =`${measure[index]} ${ingredients[index]}. `
+      : newList[index] =`${measure[index]} ${ingredients[index]}, `;
+        
+  }
+  //console.log(newList)
+  return newList;
 }
