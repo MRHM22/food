@@ -1,7 +1,15 @@
 import React from 'react'
 import { concatList, modifiedVideo } from '../../helpers/getFavoriteFood'
+import { useFavoriteStore } from '../../hooks/useFavoriteStore';
 
 export const FavoriteCard = (meal) => {
+
+    const { deleteFoodRandom } = useFavoriteStore();
+    const onDeletedFavorite = (event,{idMeal}) =>{
+        event.preventDefault();
+        deleteFoodRandom(idMeal);
+    }
+
   return (
     <div>
         <h5 className="accordion-header">
@@ -12,10 +20,13 @@ export const FavoriteCard = (meal) => {
         <div id={`flush-collapse${meal.idMeal}`} className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div className="accordion-body">
                 <div className="row">
-                    <div className="col text-center">
+                    <div className="col-10 text-center">
                     <h4>Categoria: {meal.strCategory}</h4>
                     <p>País: {meal.strArea}</p>
                     
+                    </div>
+                    <div className="col-1 col-sm-1">
+                    <button type='button' className='btn btn-danger' onClick={deleteFoodRandom(meal.idMeal)} >Eliminar</button>
                     </div>
                 </div>
                 <div className="row">
