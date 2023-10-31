@@ -2,6 +2,7 @@
 export const getFavoriteFood = (meal=[])=>{
   
   meal = deleteNull(meal);
+  //console.log(meal);
   let newMeal = [];
   const ingredients = [];
   const measure = [];

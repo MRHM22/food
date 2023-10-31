@@ -1,7 +1,11 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import {useModalStore} from '../../hooks/useModalStore';
+import { useFavoriteStore } from '../../hooks/useFavoriteStore';
+import axios from 'axios';
+import { foodApi } from '../../api/foodApi';
+import { getFavoriteFood } from '../../helpers/getFavoriteFood';
 
 const customStyles = {
     content: {
@@ -20,10 +24,28 @@ let style ='btn btn-outline-warning btn-block';
 export const FavoriteModal = () => {
 
     const {isModalOpen,closeFavoriteModal} = useModalStore();
+    const { loadingFoodRandom } = useFavoriteStore();
     const [value, setValue] = useState('Guardar');
+    
+    const [meal, setMeal] = useState(null);
+
+  useEffect(() => {
+
+    //axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
+    foodApi.get('/random.php')
+    .then((response)=> setMeal(getFavoriteFood(response.data.meals)) );
+
+ }, []);
+      
+
+    //const a = getFavoriteFood(meal);
+    //console.log(meal);
+    
 
     const onCloseModal = () => {
         closeFavoriteModal();
+        foodApi.get('/random.php')
+    .then((response)=> setMeal(getFavoriteFood(response.data.meals)) );
     }
     
     //const favorite = localStorage.getItem('favorite');
@@ -45,6 +67,7 @@ export const FavoriteModal = () => {
     }
 
     return (
+        <> {meal &&(  
     <Modal isOpen={isModalOpen}
         onRequestClose={onCloseModal}       
         style={customStyles}
@@ -52,8 +75,8 @@ export const FavoriteModal = () => {
         overlayClassName="modal-fondo"
         closeTimeoutMS={200} >
             <div className='container'>
-                <h2 className='text-center'>Hola</h2>
-
+                <h2 className='text-center'>{meal.strMeal}</h2>
+                <img src={meal.strMealThumb} className="card-img-top" />
                 <button
                     onClick={changeNameButton} 
                      className={style}
@@ -63,6 +86,7 @@ export const FavoriteModal = () => {
             </button>
             </div>
 
-    </Modal>
+    </Modal>)}
+    </>
   )
 }
