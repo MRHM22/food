@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import {useModalStore} from '../../hooks/useModalStore';
 import { useFavoriteStore } from '../../hooks/useFavoriteStore';
-import axios from 'axios';
 import { foodApi } from '../../api/foodApi';
 import { concatList, getFavoriteFood, modifiedVideo } from '../../helpers/getFavoriteFood';
 
@@ -25,7 +24,7 @@ let style ='btn btn-outline-warning btn-block';
 export const FavoriteModal = () => {
 
     const {isModalOpen,closeFavoriteModal} = useModalStore();
-    const { loadingFoodRandom } = useFavoriteStore();
+    const { registerFoodRandom,deleteFoodRandom } = useFavoriteStore();
     const [value, setValue] = useState('Guardar');
     
     const [meal, setMeal] = useState(null);
@@ -45,6 +44,7 @@ export const FavoriteModal = () => {
 
     const onCloseModal = () => {
         closeFavoriteModal();
+        setValue('Guardar');
         foodApi.get('/random.php')
     .then((response)=> setMeal(getFavoriteFood(response.data.meals)) );
     }
@@ -57,11 +57,13 @@ export const FavoriteModal = () => {
         //const favorite = localStorage.getItem('favorite');
         if(value ==='Guardar') {
             setValue('Quitar')
-            //registerFoodRandom();
+            registerFoodRandom(meal);
             style='btn btn-outline-primary btn-block';
             //localStorage.setItem('favorite',1);
         } else {
             setValue('Guardar');
+            //console.log(meal);
+            deleteFoodRandom(meal.idMeal);
             style='btn btn-outline-warning btn-block';
             //localStorage.setItem('favorite',null);
         }

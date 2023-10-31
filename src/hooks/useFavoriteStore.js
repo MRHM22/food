@@ -1,11 +1,11 @@
-//import { useDispatch } from 'react-redux'
-//import { onLoadingFoodRandom } from '../store';
+import { useDispatch } from 'react-redux'
+import { onDeleteFoodRandom, onRegisterFoodRandom } from '../store';
 import { foodApi } from '../api/foodApi';
 import { getFavoriteFood } from '../helpers/getFavoriteFood';
 
 export const useFavoriteStore = () => {
 
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
     
     const loadingFoodRandom = async() => {
         try{
@@ -21,18 +21,28 @@ export const useFavoriteStore = () => {
         }
     }
 
-    const registerFoodRandom = async() => {
+    const registerFoodRandom = (meal=[]) => {
         try {
             /*const {data} = await foodApi.get('/random.php');
             console.log(data.meals);
-            return data.meals;*/
-            //dispatch(onRegisterFoodRandom(data.meals));
+            return data.meals;*/ 
+            dispatch(onRegisterFoodRandom({...meal}));
+        }catch(error){
+            console.error(error);
+        }
+    }
+
+    const deleteFoodRandom = (idMeal)=>{
+        try {
+            //console.log(idMeal);
+            dispatch(onDeleteFoodRandom(idMeal));
         }catch(error){
             console.error(error);
         }
     }
 
     return {
+        deleteFoodRandom,
         loadingFoodRandom,
         registerFoodRandom,
         //toggleFavoriteModal
