@@ -15,7 +15,10 @@ export const favoriteSlice = createSlice({
                 state.favorite.push(payload);}
         },
         onDeleteFoodRandom: (state, {payload})=>{
-            console.log(payload)
+            //
+            //const exist = state.favorite.some(data => data.idMeal !== payload);
+            console.log(payload);
+            //console.log(exist);
             state.favorite=state.favorite.filter(data =>data.idMeal !== payload);
         }
     }

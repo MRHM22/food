@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { concatList, modifiedVideo } from '../../helpers/getFavoriteFood'
 import { useFavoriteStore } from '../../hooks/useFavoriteStore';
 
 export const FavoriteCard = (meal) => {
 
+    const [estado, setEstado] = useState(0);
     const { deleteFoodRandom } = useFavoriteStore();
-    const onDeletedFavorite = (event,{idMeal}) =>{
+    const onDeletedFavorite = async(event, id) =>{
         event.preventDefault();
-        deleteFoodRandom(idMeal);
+        
+            //console.log(id);
+        deleteFoodRandom(id);
+        //console.log(id);
     }
 
   return (
     <div>
         <h5 className="accordion-header">
-            <li className='list-group-item collapsed btn btn-outline-primary'  type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${meal.idMeal}`} aria-expanded="false" >
+            <li className='list-group-item collapsed btn btn-outline-primary' role="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${meal.idMeal}`} aria-expanded="false" >
                 {meal.strMeal}
             </li>
         </h5>
@@ -26,7 +30,7 @@ export const FavoriteCard = (meal) => {
                     
                     </div>
                     <div className="col-1 col-sm-1">
-                    <button type='button' className='btn btn-danger' onClick={deleteFoodRandom(meal.idMeal)} >Eliminar</button>
+                    <button type='button' className='btn btn-danger' onClick={(e)=>onDeletedFavorite(e,meal.idMeal)} >Eliminar</button>
                     </div>
                 </div>
                 <div className="row">
@@ -51,7 +55,7 @@ export const FavoriteCard = (meal) => {
                             {
                                 //concatList(meal.ingredients, meal.measure)
                                 concatList(meal.ingredients, meal.measure).map((elem)=>(
-                                    <li className='list-group-item'>
+                                    <li key={elem} className='list-group-item'>
                                         {elem}
                                     </li>
                                 ))
