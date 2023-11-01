@@ -1,22 +1,23 @@
 
 
 import { foodApi } from '../api/foodApi';
-import { useDispatch } from 'react-redux';
-import { onLoadingFood, onLoadingfoodByCategory } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { onLoadingFood, onLoadingfoodByCategory,onChecking } from '../store';
 import { getRandomCategories } from '../helpers/getRandomCategories';
 
 export const useFoodStore = () => {
 
     const dispatch = useDispatch();
 
-    
+    const {isLoading} = useSelector(state=>state.food);
 
     const loadingFoods = async()=>{
-
+        dispatch(onChecking());
         try{
             const {data} = await foodApi.get('/categories.php');
             const categories = getRandomCategories(data.categories);
-            dispatch( onLoadingFood(categories) );
+            setTimeout(()=>{dispatch( onLoadingFood(categories) );},2000);
+            
         } catch(error){
             console.log(error);
         }
@@ -41,7 +42,7 @@ export const useFoodStore = () => {
     }
 
   return {
-    
+    isLoading,
   //  foods,
     
     loadingFoods,
