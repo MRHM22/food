@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { concatList, modifiedVideo } from '../../helpers/getFavoriteFood'
 import { useFavoriteStore } from '../../hooks/useFavoriteStore';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 export const FavoriteCard = (meal) => {
 
-    const [estado, setEstado] = useState(0);
     const { deleteFoodRandom } = useFavoriteStore();
     const onDeletedFavorite = async(event, id) =>{
         event.preventDefault();
-        
+        Swal.fire(`Registro de comida eliminado`,'','success');
             //console.log(id);
         deleteFoodRandom(id);
         //console.log(id);
