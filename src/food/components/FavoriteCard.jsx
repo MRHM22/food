@@ -31,7 +31,7 @@ export const FavoriteCard = (meal) => {
                     
                     </div>
                     <div className="col-1 col-sm-1">
-                    <button type='button' className='btn btn-danger' onClick={(e)=>onDeletedFavorite(e,meal.idMeal)} >Eliminar</button>
+                    <button type='button' className='btn btn-danger' onClick={(e)=>onDeletedFavorite(e,meal.idMeal)} ><i className="fas fa-trash-can"></i></button>
                     </div>
                 </div>
                 <div className="row">

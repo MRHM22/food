@@ -45,6 +45,7 @@ export const FavoriteModal = () => {
     const onCloseModal = () => {
         closeFavoriteModal();
         setValue('Guardar');
+        style='btn btn-outline-warning btn-block';
         foodApi.get('/random.php')
     .then((response)=> setMeal(getFavoriteFood(response.data.meals)) );
     }

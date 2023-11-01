@@ -17,7 +17,7 @@ export const FoodHeader = () => {
   return (
     <>
     <div className='container'>
-        <div className="card text-center">
+        <div className="card text-center" >
             <div className="card-header">
                 Bienviendos
             </div>

@@ -58,7 +58,13 @@
 .ReactModalPortal .ReactModal__Overlay--before-close {
   opacity: 0;
 }
-
+.loading{
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  align-items: center;
+  position:absolute;
+}
 .modal {
   background: white;
   border-radius: 5px;

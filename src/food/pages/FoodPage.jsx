@@ -16,10 +16,11 @@ export const FoodPage = () => {
   if(isLoading === 'Chequeando'){
     console.log(isLoading);
     return ( 
-      <div className='container text-center'>
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div></div>
+      
+      <div className='container loading'>
+      <ReactLoading className='text-center ' type={'spin'} color={'red'} height={50} width={75} />
+        <p>Cargando...</p>
+      </div>
     )
   }
   return (
